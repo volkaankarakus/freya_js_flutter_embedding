@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>E-COMMERCE WEBSITE BY EDYODA | CREATED BY PRIYANKA SHARMA</title>
+    <link rel="icon" href="https://yt3.ggpht.com/a/AGF-l78km1YyNXmF0r3-0CycCA0HLA_i6zYn_8NZEg=s900-c-k-c0xffffffff-no-rj-mo" type="image/gif" sizes="16x16">
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <script src="js/jQuery3.4.1.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+    <link rel="stylesheet" href="css/flutter_target.css">
+    <script src="./flutter/flutter.js"></script>
+    <script src="flutter/js/js-interop.js" type='module' defer></script>
+</head>
+<body>
+    <div id="chatBoxStatus" style="position: absolute; top: 0; left: 0; padding: 10px; background-color: lightgrey; color: black; z-index: 100;">Chat Box: Closed</div>
+    <div id="flutter_target" style="position: fixed; bottom: 0; right: 0; z-index: 1000; transition: all 150ms ease-in;"></div>
+    
+    <!-- Load header content -->
+    <div id="1"></div>
+    <script>
+        load("header.html");
+        function load(url) {
+            var req = new XMLHttpRequest();
+            req.open("GET", url, false);
+            req.send(null);
+            document.getElementById(1).innerHTML = req.responseText;
+        }
+    </script>
+
+    <!-- Load slider content -->
+    <div id="2"></div>
+    <script>
+        load("slider.html");
+        function load(url) {
+            var req = new XMLHttpRequest();
+            req.open("GET", url, false);
+            req.send(null);
+            document.getElementById(2).innerHTML = req.responseText;
+        }
+    </script>
+
+    <!-- Load main content -->
+    <div id="3"></div>
+    <script>
+        load("content.html");
+        function load(url) {
+            var req = new XMLHttpRequest();
+            req.open("GET", url, false);
+            req.send(null);
+            document.getElementById(3).innerHTML = req.responseText;
+        }
+    </script>
+
+    <!-- Load footer content -->
+    <div id="4"></div>
+    <script>
+        load("footer.html");
+        function load(url) {
+            var req = new XMLHttpRequest();
+            req.open("GET", url, false);
+            req.send(null);
+            document.getElementById(4).innerHTML = req.responseText;
+        }
+    </script>
+
+    <!-- Slick Carousel Initialization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#containerSlider').slick({
+                dots: true,
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 1500,
+            });
+        });
+    </script>
+
+    <!-- Initialize Flutter widget -->
+    <script src="content.js"></script>
+    <script>
+        window.addEventListener("load", function(ev) {
+            console.log("Flutter is ready");
+
+            let target = document.querySelector("#flutter_target");
+            // Download main.dart.js 
+            _flutter.loader.loadEntrypoint({
+                //entryPointUrl : 'https://stlylisttest.web.app/main.dart.js',
+                entrypointUrl: "/flutter/main.dart.js",
+                onEntrypointLoaded: async function(engineInitializer) {
+                    let appRunner = await engineInitializer.initializeEngine({
+                        assetBase: "/flutter/",
+                        //assetBase: "https://stlylisttest.web.app/",
+                        hostElement: target,
+                    });
+                    await appRunner.runApp();
+                },
+            });
+        });
+    </script>
+</body>
+</html>
