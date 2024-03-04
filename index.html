@@ -11,11 +11,25 @@
     <script src="js/jQuery3.4.1.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
-    <link rel="stylesheet" href="css/flutter_target.css">
-    <script src="./flutter/flutter.js"></script>
-    <script src="flutter/js/js-interop.js" type='module' defer></script>
+    
+    <script src="https://storage.googleapis.com/stylist-addon/freya-stylist/flutter.js"></script>
+    <script src="freya-stylist/js-interop.js" type='module' defer></script>
+  
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WW8VCD2C');</script>
+    <!-- End Google Tag Manager -->
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WW8VCD2C"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
     <div id="chatBoxStatus" style="position: absolute; top: 0; left: 0; padding: 10px; background-color: lightgrey; color: black; z-index: 100;">Chat Box: Closed</div>
     <div id="flutter_target" style="position: fixed; bottom: 0; right: 0; z-index: 1000; transition: all 150ms ease-in;"></div>
     
@@ -91,7 +105,28 @@
             let target = document.querySelector("#flutter_target");
             // Download main.dart.js 
             _flutter.loader.loadEntrypoint({
-                //entryPointUrl : 'https://stlylisttest.web.app/main.dart.js',
+                entrypointUrl: "https://storage.googleapis.com/stylist-addon/freya-stylist/main.dart.js",
+                onEntrypointLoaded: async function(engineInitializer) {
+                    let appRunner = await engineInitializer.initializeEngine({
+                        assetBase: "https://storage.googleapis.com/stylist-addon/freya-stylist/",
+                        hostElement: target,
+                    });
+                    await appRunner.runApp();
+                },
+            });
+        });
+    </script>
+
+   
+     
+<!-- 
+    <script>
+        window.addEventListener("load", function(ev) {
+            console.log("Flutter is ready");
+
+            let target = document.querySelector("#flutter_target");
+            // Download main.dart.js 
+            _flutter.loader.loadEntrypoint({
                 entrypointUrl: "/flutter/main.dart.js",
                 onEntrypointLoaded: async function(engineInitializer) {
                     let appRunner = await engineInitializer.initializeEngine({
@@ -104,5 +139,11 @@
             });
         });
     </script>
+   
+     -->
 </body>
 </html>
+
+<!-- 
+open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security
+   -->
